@@ -1,1 +1,54 @@
+.bill-card {
 
+    text-align:center;
+
+}
+
+
+.amount {
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:
+    var(--primary);
+
+    margin-top:10px;
+
+}
+
+
+
+.stats {
+
+    display:flex;
+
+    justify-content:space-around;
+
+    text-align:center;
+
+}
+
+
+.stats div span {
+
+    display:block;
+
+    color:
+    var(--secondary-text);
+
+    font-size:14px;
+
+}
+
+
+.stats strong {
+
+    display:block;
+
+    margin-top:6px;
+
+    font-size:20px;
+
+}
