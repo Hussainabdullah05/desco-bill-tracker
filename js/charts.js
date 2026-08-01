@@ -104,3 +104,57 @@ function createUsageChart(labels,data){
 
 
 }
+function createBillChart(labels,data){
+
+
+    const canvas =
+    document.createElement("canvas");
+
+
+    canvas.id =
+    "billChart";
+
+
+    document
+    .querySelector("#charts .card")
+    .appendChild(canvas);
+
+
+
+    if(billChart)
+    billChart.destroy();
+
+
+
+    billChart =
+    new Chart(
+        canvas,
+        {
+
+        type:"bar",
+
+        data:{
+
+            labels:labels,
+
+            datasets:[{
+
+                label:"Monthly Bill",
+
+                data:data
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true
+
+        }
+
+
+    });
+
+
+}
