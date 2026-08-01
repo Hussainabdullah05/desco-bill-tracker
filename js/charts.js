@@ -31,8 +31,48 @@ async function loadCharts(){
 
 
 
-    const billsAmount =
+    const billValues =
     data.map(row=>Number(row[18]));
+
+
+
+
+
+    // Summary calculations
+
+
+    const avgUsage =
+    units.reduce((a,b)=>a+b,0)
+    /
+    units.length;
+
+
+
+    const avgBill =
+    billValues.reduce((a,b)=>a+b,0)
+    /
+    billValues.length;
+
+
+
+
+    document
+    .getElementById("avgUsage")
+    .textContent =
+    avgUsage.toFixed(1)
+    +
+    " kWh";
+
+
+
+    document
+    .getElementById("avgBill")
+    .textContent =
+    "৳ "
+    +
+    avgBill.toFixed(2);
+
+
 
 
 
@@ -46,11 +86,12 @@ async function loadCharts(){
 
     createBillChart(
         months,
-        billsAmount
+        billValues
     );
 
 
 }
+
 
 
 
@@ -63,6 +104,7 @@ function createUsageChart(labels,data){
     const ctx =
     document
     .getElementById("usageChart");
+
 
 
     if(usageChart)
@@ -79,13 +121,13 @@ function createUsageChart(labels,data){
 
         data:{
 
-            labels:labels,
+            labels,
 
             datasets:[{
 
-                label:"kWh Usage",
+                label:"kWh",
 
-                data:data,
+                data,
 
                 tension:0.3
 
@@ -107,20 +149,17 @@ function createUsageChart(labels,data){
 
 
 
+
+
+
+
+
 function createBillChart(labels,data){
 
 
-    const canvas =
-    document.createElement("canvas");
-
-
-    canvas.id =
-    "billChart";
-
-
+    const ctx =
     document
-    .querySelector("#charts .card")
-    .appendChild(canvas);
+    .getElementById("billChart");
 
 
 
@@ -131,24 +170,25 @@ function createBillChart(labels,data){
 
     billChart =
     new Chart(
-        canvas,
+        ctx,
         {
 
         type:"bar",
 
         data:{
 
-            labels:labels,
+            labels,
 
             datasets:[{
 
-                label:"Monthly Bill",
+                label:"Bill (৳)",
 
-                data:data
+                data
 
             }]
 
         },
+
 
         options:{
 
