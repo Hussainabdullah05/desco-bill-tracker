@@ -1,1 +1,44 @@
+.history-item{
 
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 0;
+
+    border-bottom:
+    1px solid var(--border);
+
+}
+
+
+
+.history-item span{
+
+    color:
+    var(--secondary-text);
+
+}
+
+
+
+.history-item button{
+
+    margin-top:8px;
+
+    border:none;
+
+    background:
+    #BA1A1A;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+}
