@@ -104,6 +104,9 @@ function createUsageChart(labels,data){
 
 
 }
+
+
+
 function createBillChart(labels,data){
 
 
