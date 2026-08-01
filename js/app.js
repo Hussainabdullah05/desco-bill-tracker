@@ -1,70 +1,87 @@
-let currentBill = {};
+document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("load", async () => {
 
-    // Load tariff and settings
-    const tariffData = await getTariffs();
-    loadTariffs(tariffData);
+    const buttons = document.querySelectorAll(
+        ".bottom-nav button"
+    );
 
-    const settingData = await getSettings();
-    loadSettings(settingData);
 
-    // Default month = current month
-    const today = new Date();
-    document.getElementById("month").value =
-        today.toISOString().slice(0, 7);
+    const pages = document.querySelectorAll(
+        ".page"
+    );
 
-    // Live calculation
-    document.getElementById("units").addEventListener("input", () => {
 
-        const units =
-            document.getElementById("units").value;
 
-        currentBill = calculateBill(units);
+    buttons.forEach(button => {
 
-        updateUI(currentBill);
+
+        button.addEventListener("click", () => {
+
+
+            const target =
+            button.dataset.page;
+
+
+
+            // Hide all pages
+
+            pages.forEach(page => {
+
+                page.classList.remove("active");
+
+            });
+
+
+
+            // Show selected page
+
+            document
+            .getElementById(target)
+            .classList.add("active");
+
+
+
+            // Update selected button
+
+            buttons.forEach(btn => {
+
+                btn.classList.remove("active");
+
+            });
+
+
+            button.classList.add("active");
+
+
+
+            // Load page data
+
+            if(target === "history"){
+
+                loadHistory();
+
+            }
+
+
+            if(target === "settings"){
+
+                loadSettingsPage();
+
+            }
+
+
+            if(target === "charts"){
+
+                loadCharts();
+
+            }
+
+
+
+        });
+
 
     });
 
-    // Save button
-    document.getElementById("saveBtn").addEventListener("click", async () => {
-
-        const units =
-            Number(document.getElementById("units").value);
-
-        if (!units) {
-
-            alert("Please enter units.");
-
-            return;
-
-        }
-
-        const data = {
-
-            month:
-                document.getElementById("month").value,
-
-            units,
-
-            ...currentBill
-
-        };
-
-        const result = await saveBill(data);
-
-        if (result.success) {
-
-            alert("Bill saved successfully!");
-
-            document.getElementById("units").value = "";
-
-            currentBill = calculateBill(0);
-
-            updateUI(currentBill);
-
-        }
-
-    });
 
 });
