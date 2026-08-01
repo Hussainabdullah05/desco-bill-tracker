@@ -97,3 +97,26 @@ async function deleteBill(month){
 
 
 }
+
+
+async function updateSettings(data){
+
+
+    data.action =
+    "updateSettings";
+
+
+    const response =
+    await fetch(
+        API_URL,
+        {
+            method:"POST",
+            body:JSON.stringify(data)
+        }
+    );
+
+
+    return await response.json();
+
+
+}
